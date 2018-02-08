@@ -1,58 +1,85 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
+import React from 'react';
 import {
-  Platform,
+  ListView,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableHighlight,
 } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+const MultipeerConnectivity = require('react-native-multipeer');
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 50,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  }
 });
 
-type Props = {};
-export default class App extends Component<Props> {
+function getStateFromSources() {
+  const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+  return {
+    dataSource: ds.cloneWithRows(MultipeerConnectivity.getAllPeers())
+  };
+}
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = getStateFromSources();
+    this.renderRow = this.renderRow.bind(this);
+    this.invitePeer = this.invitePeer.bind(this);
+    this.onPeerChange = this.onPeerChange.bind(this);
+  }
+
+  componentDidMount() {
+    MultipeerConnectivity.on('peerFound', this.onPeerChange);
+    MultipeerConnectivity.on('peerLost', this.onPeerChange);
+    MultipeerConnectivity.on('invite', ((event) => {
+      // Automatically accept invitations
+      MultipeerConnectivity.rsvp(event.invite.id, true);
+    }).bind(this));
+    MultipeerConnectivity.on('peerConnected', (event) => {
+      alert(event.peer.id + ' connected!');
+    });
+    MultipeerConnectivity.advertise('channel1', { name: 'User-' + Math.round(1e6 * Math.random()) });
+    MultipeerConnectivity.browse('channel1');
+  }
+
+  renderRow(peer) {
+    return (
+      <TouchableHighlight onPress={() => this.invitePeer(peer)} style={styles.row}>
+        <View>
+          <Text>{peer.name}</Text>
+        </View>
+      </TouchableHighlight>
+    );
+  }
+
+  invitePeer(peer) {
+    MultipeerConnectivity.invite(peer.id);
+  }
+
+  onPeerChange() {
+    this.setState(getStateFromSources());
+  }
+
   render() {
+    const { dataSource } = this.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <ListView
+          style={styles.peers}
+          dataSource={dataSource}
+          renderRow={this.renderRow}
+          enableEmptySections
+        />
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+export default App;
