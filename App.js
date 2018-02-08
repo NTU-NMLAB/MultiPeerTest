@@ -16,13 +16,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
-  }
+  },
 });
 
 function getStateFromSources() {
-  const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+  const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
   return {
-    dataSource: ds.cloneWithRows(MultipeerConnectivity.getAllPeers())
+    dataSource: ds.cloneWithRows(MultipeerConnectivity.getAllPeers()),
   };
 }
 
@@ -41,7 +41,7 @@ class App extends React.Component {
     MultipeerConnectivity.on('invite', ((event) => {
       // Automatically accept invitations
       MultipeerConnectivity.rsvp(event.invite.id, true);
-    }).bind(this));
+    }));
     MultipeerConnectivity.on('peerConnected', (event) => {
       alert(event.peer.id + ' connected!');
     });
