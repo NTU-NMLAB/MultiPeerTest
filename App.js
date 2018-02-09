@@ -31,7 +31,7 @@ class App extends React.Component {
     super(props);
     this.state = getStateFromSources();
     this.renderRow = this.renderRow.bind(this);
-    this.invitePeer = this.invitePeer.bind(this);
+    this.invitePeer = this.constructor.invitePeer.bind(this);
     this.onPeerChange = this.onPeerChange.bind(this);
   }
 
@@ -43,15 +43,15 @@ class App extends React.Component {
       MultipeerConnectivity.rsvp(event.invite.id, true);
     }));
     MultipeerConnectivity.on('peerConnected', (event) => {
-      alert(event.peer.id + ' connected!');
+      alert(`${event.peer.id} - connected!`);
     });
-    MultipeerConnectivity.advertise('channel1', { name: 'User-' + Math.round(1e6 * Math.random()) });
+    MultipeerConnectivity.advertise('channel1', { name: `User-${Math.round(1e6 * Math.random())}` });
     MultipeerConnectivity.browse('channel1');
   }
 
   renderRow(peer) {
     return (
-      <TouchableHighlight onPress={() => this.invitePeer(peer)} style={styles.row}>
+      <TouchableHighlight onPress={() => this.constructor.invitePeer(peer)} style={styles.row}>
         <View>
           <Text>{peer.name}</Text>
         </View>
@@ -59,7 +59,7 @@ class App extends React.Component {
     );
   }
 
-  invitePeer(peer) {
+  static invitePeer(peer) {
     MultipeerConnectivity.invite(peer.id);
   }
 
