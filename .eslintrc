@@ -21,6 +21,8 @@
   },
   "rules" : {
     "arrow-body-style" : "warn",
-    "comma-dangle": "warn"
+    "comma-dangle": "warn",
+    "no-console":"off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
   }
 }
