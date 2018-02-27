@@ -35,7 +35,6 @@ const AppConstants = {
     },
   },
   DEFAULT_CHANNEL: 'channel1',
-  USER_ID_PREFIX: 'User-',
 };
 
 export default AppConstants;

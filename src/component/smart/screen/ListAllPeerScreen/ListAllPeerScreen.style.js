@@ -8,13 +8,13 @@ const styles = StyleSheet.create({
   content: {
     flex: 7,
   },
-  selfIdTxtContainer: {
+  selfNameTxtContainer: {
     height: 24,
     backgroundColor: AppConstants.STYLE.COLOR.MAIN_BG,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  selfIdTxt: {
+  selfNameTxt: {
     fontSize: 16,
     color: AppConstants.STYLE.COLOR.TEXT,
   },

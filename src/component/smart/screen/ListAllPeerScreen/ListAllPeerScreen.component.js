@@ -9,26 +9,32 @@ class ListAllPeerScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selfId: `${AppConstants.USER_ID_PREFIX}${Math.round(1e6 * Math.random())}`,
       peerListDataSource: ListAllPeerScreen.getInitPeerListDataSource(),
     };
-    this.onPeerChange = this.onPeerChange.bind(this);
     this.refreshPeerListDataSource = this.refreshPeerListDataSource.bind(this);
+    this.onPeerFound = () => { this.refreshPeerListDataSource(); };
+    this.onPeerLost = () => { this.refreshPeerListDataSource(); };
+    this.selfName = MultipeerConnectivity.getSelfName();
   }
-  componentDidMount() {
-    MultipeerConnectivity.on('peerFound', this.onPeerChange);
-    MultipeerConnectivity.on('peerLost', this.onPeerChange);
-    MultipeerConnectivity.advertise(AppConstants.DEFAULT_CHANNEL, { name: this.state.selfId });
+  componentWillMount() {
+    MultipeerConnectivity.on('peerFound', this.onPeerFound);
+    MultipeerConnectivity.on('peerLost', this.onPeerLost);
+    MultipeerConnectivity.advertise(AppConstants.DEFAULT_CHANNEL);
     MultipeerConnectivity.browse(AppConstants.DEFAULT_CHANNEL);
+  }
+  componentWillUnmount() {
+    MultipeerConnectivity.removeListener('peerFound', this.onPeerFound);
+    MultipeerConnectivity.removeListener('peerLost', this.onPeerLost);
+    MultipeerConnectivity.hide(AppConstants.DEFAULT_CHANNEL);
   }
   render() {
     const { goBack } = this.props;
-    const { peerListDataSource, selfId } = this.state;
+    const { peerListDataSource } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.content}>
-          <View style={styles.selfIdTxtContainer}>
-            <Text style={styles.selfIdTxt}>{AppConstants.TEXT.COMMON.SELF_ID}{selfId}</Text>
+          <View style={styles.selfNameTxtContainer}>
+            <Text style={styles.selfNameTxt}>{this.selfName}</Text>
           </View>
           <ListView
             style={styles.peerIdList}
@@ -47,9 +53,6 @@ class ListAllPeerScreen extends React.Component {
         </TouchableOpacity>
       </View>
     );
-  }
-  onPeerChange() {
-    this.refreshPeerListDataSource();
   }
   refreshPeerListDataSource() {
     const newDataSource = MultipeerConnectivity.getAllPeers();
