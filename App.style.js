@@ -9,6 +9,8 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 6,
+    backgroundColor: '#f2efe8',
+    paddingBottom: '8%',
   },
 });
 
