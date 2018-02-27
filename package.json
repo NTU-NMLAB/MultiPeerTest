@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "16.2.0",
     "react-native": "0.53.0",
-    "react-native-multipeer": "^0.1.1"
+    "react-native-multipeer": "file:src/submodule/react-native-multipeer"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
