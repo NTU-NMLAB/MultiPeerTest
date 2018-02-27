@@ -3,9 +3,10 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: '6%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#b3c2bf',
+    backgroundColor: '#6a5750',
   },
   text: {
     fontSize: 36,

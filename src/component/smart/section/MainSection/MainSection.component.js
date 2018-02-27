@@ -45,7 +45,6 @@ class MainSection extends React.Component {
     }
     return (
       <View style={styles.container}>
-        {/* <HomeScreen switchScreen={this.switchScreen} /> */}
         {content}
       </View>
     );

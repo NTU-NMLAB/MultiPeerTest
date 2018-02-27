@@ -6,9 +6,10 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    margin: '3%',
+    marginHorizontal: '6%',
+    marginVertical: '3%',
     borderRadius: 10,
-    backgroundColor: '#b3c2bf',
+    backgroundColor: '#6a5750',
   },
   buttonTitle: {
     flex: 3,

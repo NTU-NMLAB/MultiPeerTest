@@ -3,6 +3,7 @@ const AppConstants = {
   TEXT: {
     COMMON: {
       GO_BACK: 'Back',
+      SELF_ID: 'Self ID: ',
     },
     HOME_SCREEN: {
       LIST_ALL_PEER: {
@@ -27,6 +28,8 @@ const AppConstants = {
       },
     },
   },
+  DEFAULT_CHANNEL: 'channel1',
+  USER_ID_PREFIX: 'User-',
 };
 
 export default AppConstants;
