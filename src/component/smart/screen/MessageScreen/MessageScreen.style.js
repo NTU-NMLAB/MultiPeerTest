@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import AppConstants from '../../../../constant/App.constant';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
   backButtonText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#feffff',
+    color: AppConstants.STYLE.COLOR.TEXT,
   },
 });
 

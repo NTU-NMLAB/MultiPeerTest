@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import AppConstants from '../../../../constant/App.constant';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,13 +10,13 @@ const styles = StyleSheet.create({
   },
   selfIdTxtContainer: {
     height: 24,
-    backgroundColor: '#6a5750',
+    backgroundColor: AppConstants.STYLE.COLOR.MAIN_BG,
     justifyContent: 'center',
     alignItems: 'center',
   },
   selfIdTxt: {
     fontSize: 16,
-    color: '#feffff',
+    color: AppConstants.STYLE.COLOR.TEXT,
   },
   peerIdListItem: {
     height: 64,
@@ -27,20 +28,20 @@ const styles = StyleSheet.create({
   },
   peerIdListItemTxt: {
     fontSize: 24,
-    color: '#feffff',
+    color: AppConstants.STYLE.COLOR.TEXT,
   },
   backButton: {
     flex: 1,
     margin: '3%',
     borderRadius: 10,
-    backgroundColor: '#6a5750',
+    backgroundColor: AppConstants.STYLE.COLOR.MAIN_BG,
     justifyContent: 'center',
     alignItems: 'center',
   },
   backButtonText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#feffff',
+    color: AppConstants.STYLE.COLOR.TEXT,
   },
 });
 

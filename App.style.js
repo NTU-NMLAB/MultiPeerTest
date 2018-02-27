@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   main: {
-    flex: 7,
+    flex: 6,
   },
 });
 

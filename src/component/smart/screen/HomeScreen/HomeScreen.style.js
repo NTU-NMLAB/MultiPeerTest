@@ -1,7 +1,9 @@
 import { StyleSheet } from 'react-native';
+import AppConstants from '../../../../constant/App.constant';
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: '8%',
     flex: 1,
   },
   button: {
@@ -9,7 +11,7 @@ const styles = StyleSheet.create({
     marginHorizontal: '6%',
     marginVertical: '3%',
     borderRadius: 10,
-    backgroundColor: '#6a5750',
+    backgroundColor: AppConstants.STYLE.COLOR.MAIN_BG,
   },
   buttonTitle: {
     flex: 3,
@@ -19,7 +21,7 @@ const styles = StyleSheet.create({
   buttonTitleText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#feffff',
+    color: AppConstants.STYLE.COLOR.TEXT,
   },
   buttonDesc: {
     flex: 2,

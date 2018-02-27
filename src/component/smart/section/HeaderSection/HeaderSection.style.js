@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import AppConstants from '../../../../constant/App.constant';
 
 const styles = StyleSheet.create({
   container: {
@@ -6,11 +7,11 @@ const styles = StyleSheet.create({
     paddingTop: '6%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#6a5750',
+    backgroundColor: AppConstants.STYLE.COLOR.MAIN_BG,
   },
   text: {
     fontSize: 36,
-    color: '#feffff',
+    color: AppConstants.STYLE.COLOR.TEXT,
   },
 });
 

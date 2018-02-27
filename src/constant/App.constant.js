@@ -1,5 +1,11 @@
 const AppConstants = {
   APP_NAME: 'MultiPeerTest',
+  STYLE: {
+    COLOR: {
+      MAIN_BG: '#68705c',
+      TEXT: '#feffff',
+    },
+  },
   TEXT: {
     COMMON: {
       GO_BACK: 'Back',
