@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { View, Text, ListView } from 'react-native';
 import MultipeerConnectivity from '../../../../submodule/react-native-multipeer';
 import styles from './PeerList.style';
+import AppConstants from '../../../../constant/App.constant';
 
 class PeerList extends React.Component {
   constructor(props) {
@@ -24,6 +25,16 @@ class PeerList extends React.Component {
     MultipeerConnectivity.removeListener('peerFound', this.onPeerFound);
     MultipeerConnectivity.removeListener('peerLost', this.onPeerLost);
     MultipeerConnectivity.hide(this.props.channel);
+    MultipeerConnectivity.stopBrowseAndClearPeers(this.props.channel);
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.channel !== this.props.channel) {
+      MultipeerConnectivity.hide(prevProps.channel);
+      MultipeerConnectivity.stopBrowseAndClearPeers(prevProps.channel);
+      MultipeerConnectivity.advertise(this.props.channel);
+      MultipeerConnectivity.browse(this.props.channel);
+      this.refreshDataSource();
+    }
   }
   render() {
     const { dataSource } = this.state;
@@ -59,7 +70,7 @@ PeerList.propTypes = {
 };
 
 PeerList.defaultProps = {
-  channel: '',
+  channel: AppConstants.DEFAULT_CHANNEL,
 };
 
 export default PeerList;

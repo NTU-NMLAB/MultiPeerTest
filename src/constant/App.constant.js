@@ -3,6 +3,7 @@ const AppConstants = {
   STYLE: {
     COLOR: {
       MAIN_BG: '#68705c',
+      MAIN_BG_LIGHT: '#a0ad8c',
       TEXT: '#feffff',
     },
   },
