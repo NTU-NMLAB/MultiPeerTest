@@ -8,16 +8,6 @@ const styles = StyleSheet.create({
   content: {
     flex: 7,
   },
-  selfNameTxtContainer: {
-    height: 24,
-    backgroundColor: AppConstants.STYLE.COLOR.MAIN_BG,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  selfNameTxt: {
-    fontSize: 16,
-    color: AppConstants.STYLE.COLOR.TEXT,
-  },
   peerIdListItem: {
     height: 64,
     marginHorizontal: '3%',
