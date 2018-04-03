@@ -7,11 +7,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "16.2.0",
-    "react-native": "0.53.0",
-    "react-native-multipeer": "file:src/submodule/react-native-multipeer"
-  },
-  "devDependencies": {
     "babel-eslint": "^8.2.1",
     "babel-jest": "22.1.0",
     "babel-preset-react-native": "4.0.0",
@@ -22,8 +17,14 @@
     "eslint-plugin-react-native": "^3.2.1",
     "jest": "22.1.4",
     "prop-types": "^15.6.0",
-    "react-test-renderer": "16.2.0"
+    "react": "16.2.0",
+    "react-native": "0.53.0",
+    "react-native-multipeer": "file:src/submodule/react-native-multipeer",
+    "react-redux": "^5.0.7",
+    "react-test-renderer": "16.2.0",
+    "redux": "^3.7.2"
   },
+  "devDependencies": {},
   "jest": {
     "preset": "react-native"
   }

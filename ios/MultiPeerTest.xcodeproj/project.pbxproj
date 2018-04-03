@@ -706,11 +706,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 98NV73U5B2;
+						DevelopmentTeam = L82WSP76LW;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 98NV73U5B2;
+						DevelopmentTeam = L82WSP76LW;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1201,7 +1201,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 98NV73U5B2;
+				DEVELOPMENT_TEAM = L82WSP76LW;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1224,7 +1224,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 98NV73U5B2;
+				DEVELOPMENT_TEAM = L82WSP76LW;
 				INFOPLIST_FILE = MultiPeerTestTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1244,7 +1244,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 98NV73U5B2;
+				DEVELOPMENT_TEAM = L82WSP76LW;
 				INFOPLIST_FILE = MultiPeerTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1252,7 +1252,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.tom6311tom6311.MultiPeerTest;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.ntueenmlab.MultiPeerTest;
 				PRODUCT_NAME = MultiPeerTest;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1263,7 +1263,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 98NV73U5B2;
+				DEVELOPMENT_TEAM = L82WSP76LW;
 				INFOPLIST_FILE = MultiPeerTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1271,7 +1271,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.tom6311tom6311.MultiPeerTest;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.ntueenmlab.MultiPeerTest;
 				PRODUCT_NAME = MultiPeerTest;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
