@@ -4,38 +4,25 @@ const AppConstants = {
     COLOR: {
       MAIN_BG: '#68705c',
       MAIN_BG_LIGHT: '#a0ad8c',
+      MAIN_BG_SHALLOW: '#f2efe8',
       TEXT: '#feffff',
+      BTN_ON: '#e05038',
     },
   },
   TEXT: {
     COMMON: {
-      GO_BACK: 'Back',
       SELF_ID: 'Self ID: ',
     },
-    HOME_SCREEN: {
-      LIST_ALL_PEER: {
-        TITLE: 'List All Peers',
-        DESC: 'List all nearby peers',
-      },
-      LIST_CHANNEL_PEER: {
-        TITLE: 'List Channel Peers',
-        DESC: 'List all peers in the same channel',
-      },
-      CONNECTION: {
-        TITLE: 'Connection',
-        DESC: 'Connect to specific peer, and list all peer\'s status',
-      },
-      BROADCAST: {
-        TITLE: 'Broadcast',
-        DESC: 'Send message to all connected peers',
-      },
-      MESSAGE: {
-        TITLE: 'Message',
-        DESC: 'Send message to specific peer',
-      },
+    PEER_LIST_SECTION_TITLE: {
+      FOUND: 'Found',
+      INVITED: 'Invited',
+      CONNECTED: 'Connected',
+    },
+    P2P_OP: {
+      ADVERTISE: 'Advertise',
+      BROWSE: 'Browse',
     },
   },
-  DEFAULT_CHANNEL: 'channel1',
 };
 
 export default AppConstants;

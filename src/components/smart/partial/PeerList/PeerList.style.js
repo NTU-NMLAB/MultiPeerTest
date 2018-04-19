@@ -2,6 +2,10 @@ import { StyleSheet } from 'react-native';
 import AppConstants from '../../../../constants/App.constant';
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
   listItem: {
     height: 64,
     marginHorizontal: '3%',
@@ -9,6 +13,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#b3c2bf',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  sectionHeadTxt: {
+    backgroundColor: AppConstants.STYLE.COLOR.MAIN_BG_LIGHT,
+    textAlign: 'center',
   },
   listItemNameText: {
     fontSize: 24,

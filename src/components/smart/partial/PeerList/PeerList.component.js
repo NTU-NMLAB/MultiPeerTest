@@ -1,117 +1,96 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, ListView, TouchableOpacity } from 'react-native';
-import MultipeerConnectivity from '../../../../submodule/react-native-multipeer';
+import { connect } from 'react-redux';
+import { Text, SectionList, TouchableOpacity } from 'react-native';
 import styles from './PeerList.style';
 import AppConstants from '../../../../constants/App.constant';
+import MultiPeerActions from '../../../../submodule/react-native-multipeer/actions/MultiPeer.action';
 
 class PeerList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dataSource: PeerList.getInitDataSource(),
-    };
-    this.refreshDataSource = this.refreshDataSource.bind(this);
-    this.onPeerFound = () => { this.refreshDataSource(); };
-    this.onPeerLost = () => { this.refreshDataSource(); };
-    this.onInvite = (event) => {
-      MultipeerConnectivity.rsvp(event.invite.id, true);
-    };
-    this.onPeerConnected = () => {
-      this.refreshDataSource();
-    };
-    this.onPeerDisconnected = () => {
-      this.refreshDataSource();
-    };
-  }
-  componentWillMount() {
-    MultipeerConnectivity.on('peerFound', this.onPeerFound);
-    MultipeerConnectivity.on('peerLost', this.onPeerLost);
-    MultipeerConnectivity.on('invite', this.onInvite);
-    MultipeerConnectivity.on('peerConnected', this.onPeerConnected);
-    MultipeerConnectivity.on('peerDisconnected', this.onPeerDisconnected);
-    MultipeerConnectivity.advertise(this.props.channel);
-    MultipeerConnectivity.browse(this.props.channel);
-  }
-  componentWillUnmount() {
-    MultipeerConnectivity.removeListener('peerFound', this.onPeerFound);
-    MultipeerConnectivity.removeListener('peerLost', this.onPeerLost);
-    MultipeerConnectivity.removeListener('invite', this.onInvite);
-    MultipeerConnectivity.removeListener('peerConnected', this.onPeerConnected);
-    MultipeerConnectivity.removeListener('peerDisconnected', this.onPeerDisconnected);
-    MultipeerConnectivity.hide(this.props.channel);
-    MultipeerConnectivity.stopBrowseAndClearPeers(this.props.channel);
-  }
-  componentDidUpdate(prevProps) {
-    if (prevProps.channel !== this.props.channel) {
-      MultipeerConnectivity.hide(prevProps.channel);
-      MultipeerConnectivity.stopBrowseAndClearPeers(prevProps.channel);
-      MultipeerConnectivity.advertise(this.props.channel);
-      MultipeerConnectivity.browse(this.props.channel);
-      this.refreshDataSource();
-    }
+  constructor() {
+    super();
+    this.renderItem = this.renderItem.bind(this);
+    this.onItemPressed = this.onItemPressed.bind(this);
   }
   render() {
-    const { dataSource } = this.state;
-    const { connectable } = this.props;
+    const { peers } = this.props;
     return (
-      <ListView
+      <SectionList
         style={styles.container}
-        dataSource={dataSource}
-        renderRow={connectable ? PeerList.renderConnectableRow : PeerList.renderRow}
-        enableEmptySections
+        renderItem={this.renderItem}
+        renderSectionHeader={PeerList.renderSectionHeader}
+        sections={PeerList.adaptDataSource(peers)}
+        keyExtractor={peer => peer.id}
       />
     );
   }
-  refreshDataSource() {
-    const newDataSource = [].concat(MultipeerConnectivity.getAllPeers());
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(newDataSource),
-    });
-  }
-  static getInitDataSource() {
-    return new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
-  }
-  static renderRow(peer) {
-    return (
-      <View style={styles.listItem}>
-        <Text style={styles.listItemNameText}>{peer.name}</Text>
-      </View>
-    );
-  }
-  static renderConnectableRow(peer) {
+  renderItem({ item }) {
     return (
       <TouchableOpacity
         style={styles.listItem}
-        onPress={() => { PeerList.onToggleConnection(peer); }}
+        onPress={() => { this.onItemPressed(item); }}
       >
         <Text
-          style={peer.connected ? styles.listItemNameTextConnected : styles.listItemNameText}
+          style={item.connected ? styles.listItemNameTextConnected : styles.listItemNameText}
         >
-          {peer.name}
+          {item.name}
         </Text>
       </TouchableOpacity>
     );
   }
-  static onToggleConnection(peer) {
-    if (peer.connected) {
-      MultipeerConnectivity.disconnect();
+  static renderSectionHeader({ section: { title } }) {
+    return (
+        <Text style={styles.sectionHeadTxt}>{title}</Text>
+    );
+  }
+  static adaptDataSource(peers) {
+    const peerArray = Object.values(peers);
+    const foundSection = {
+      title: AppConstants.TEXT.PEER_LIST_SECTION_TITLE.FOUND,
+      data: peerArray.filter(peer => (!peer.connected && !peer.invited && peer.invitationId === '')),
+    };
+    const invitedSection = {
+      title: AppConstants.TEXT.PEER_LIST_SECTION_TITLE.INVITED,
+      data: peerArray.filter(peer => (!peer.connected && (peer.invited || peer.invitationId !== ''))),
+    };
+    const connectedSection = {
+      title: AppConstants.TEXT.PEER_LIST_SECTION_TITLE.CONNECTED,
+      data: peerArray.filter(peer => (peer.connected)),
+    };
+    return [
+      foundSection,
+      invitedSection,
+      connectedSection,
+    ].filter(section => section.data.length !== 0);
+  }
+  onItemPressed(peer) {
+    const { selfName, invite, responseInvite } = this.props;
+    if (peer.connected || peer.invited) {
+      return;
+    }
+    if (peer.invitationId === '') {
+      invite(peer.id, { name: selfName });
     } else {
-      MultipeerConnectivity.invite(peer);
+      responseInvite(peer, true);
     }
   }
 }
 
 PeerList.propTypes = {
-  channel: PropTypes.string,
-  connectable: PropTypes.bool,
+  selfName: PropTypes.string,
+  peers: PropTypes.object,
+  invite: PropTypes.func,
+  responseInvite: PropTypes.func,
 };
 
-PeerList.defaultProps = {
-  channel: AppConstants.DEFAULT_CHANNEL,
-  connectable: false,
-};
+const mapStateToProps = state => ({
+  selfName: state.multipeer.selfName,
+  peers: state.multipeer.peers,
+});
 
-export default PeerList;
+const mapDispatchToProps = dispatch => ({
+  invite: (peerId, myInfo) => dispatch(MultiPeerActions.invite(peerId, myInfo)),
+  responseInvite: (sender, accept) => dispatch(MultiPeerActions.responseInvite(sender, accept)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PeerList);
