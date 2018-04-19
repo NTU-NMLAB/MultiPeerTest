@@ -10,9 +10,7 @@ const AppConstants = {
     },
   },
   TEXT: {
-    COMMON: {
-      SELF_ID: 'Self ID: ',
-    },
+    COMMON: {},
     PEER_LIST_SECTION_TITLE: {
       FOUND: 'Found',
       INVITED: 'Invited',

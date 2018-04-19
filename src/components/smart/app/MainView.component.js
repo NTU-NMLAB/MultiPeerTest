@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import HeaderSection from '../../dumb/section/HeaderSection/HeaderSection.component';
-import MainSection from '../section/MainSection/MainSection.component';
+import MainSection from '../../dumb/section/MainSection/MainSection.component';
 import styles from './MainView.style';
 
 const MainView = () => (

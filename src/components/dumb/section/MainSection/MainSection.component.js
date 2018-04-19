@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import SelfNameBox from '../../partial/SelfNameBox/SelfNameBox.component';
-import AdvertiseControl from '../../partial/AdvertiseControl/AdvertiseControl.component';
-import BrowseControl from '../../partial/BrowseControl/BrowseControl.component';
-import PeerList from '../../partial/PeerList/PeerList.component';
+import SelfNameBox from '../../../smart/partial/SelfNameBox/SelfNameBox.component';
+import AdvertiseControl from '../../../smart/partial/AdvertiseControl/AdvertiseControl.component';
+import BrowseControl from '../../../smart/partial/BrowseControl/BrowseControl.component';
+import PeerList from '../../../smart/partial/PeerList/PeerList.component';
 import styles from './MainSection.style';
 
 const MainSection = () => (
