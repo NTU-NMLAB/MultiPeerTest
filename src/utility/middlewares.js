@@ -1,3 +1,4 @@
+import multipeerMiddlewares from '../submodule/react-native-multipeer/middlewares/middlewares';
 const thunkMiddleware = ({ dispatch, getState }) => (
   next => (
     (action) => {
@@ -26,6 +27,6 @@ const thunkMiddleware = ({ dispatch, getState }) => (
 const middlewares = [
   thunkMiddleware,
   // loggerMiddleware,
-];
+].concat(multipeerMiddlewares);
 
 export default middlewares;
