@@ -13,7 +13,8 @@ const AppConstants = {
     COMMON: {},
     PEER_LIST_SECTION_TITLE: {
       FOUND: 'Found',
-      INVITED: 'Invited',
+      INVITE_OTHERS: 'I have invited...',
+      INVITED_BY_OTHERS: 'I have been invited by...',
       CONNECTED: 'Connected',
     },
     P2P_OP: {

@@ -49,9 +49,13 @@ class PeerList extends React.Component {
       title: AppConstants.TEXT.PEER_LIST_SECTION_TITLE.FOUND,
       data: peerArray.filter(peer => (!peer.connected && !peer.invited && peer.invitationId === '')),
     };
-    const invitedSection = {
-      title: AppConstants.TEXT.PEER_LIST_SECTION_TITLE.INVITED,
-      data: peerArray.filter(peer => (!peer.connected && (peer.invited || peer.invitationId !== ''))),
+    const inviteOthersSection = {
+      title: AppConstants.TEXT.PEER_LIST_SECTION_TITLE.INVITE_OTHERS,
+      data: peerArray.filter(peer => (!peer.connected && peer.invited === true)),
+    };
+    const invitedByOthersSection = {
+      title: AppConstants.TEXT.PEER_LIST_SECTION_TITLE.INVITED_BY_OTHERS,
+      data: peerArray.filter(peer => (!peer.connected && peer.invitationId !== '')),
     };
     const connectedSection = {
       title: AppConstants.TEXT.PEER_LIST_SECTION_TITLE.CONNECTED,
@@ -59,7 +63,8 @@ class PeerList extends React.Component {
     };
     return [
       foundSection,
-      invitedSection,
+      inviteOthersSection,
+      invitedByOthersSection,
       connectedSection,
     ].filter(section => section.data.length !== 0);
   }
